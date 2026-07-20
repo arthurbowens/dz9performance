@@ -41,8 +41,8 @@
   display: flex;
   align-items: center;
   justify-content: space-between;
-  min-height: 4.25rem;
-  padding-block: 0.35rem;
+  min-height: 5rem;
+  padding-block: 0.4rem;
   gap: 0.75rem;
 }
 
@@ -56,19 +56,17 @@
 }
 
 .brand-logo {
-  width: 3.25rem;
-  height: 3.25rem;
+  width: 5.75rem;
+  height: 5.75rem;
   object-fit: contain;
+  object-position: center;
   flex-shrink: 0;
+  transform: scale(1.15);
+  transform-origin: left center;
 }
 
 .brand-text {
-  display: flex;
-  flex-direction: column;
-  line-height: 1;
-  font-family: var(--font-display);
-  letter-spacing: 0.04em;
-  min-width: 0;
+  display: none;
 }
 
 .brand-dz9 {
@@ -154,7 +152,7 @@
 
 .mobile-menu {
   position: fixed;
-  inset: 4.25rem 0 0 0;
+  inset: 5rem 0 0 0;
   z-index: 60;
   background: rgba(8, 8, 8, 0.98);
   border-bottom: 1px solid var(--border);
@@ -260,8 +258,8 @@
 /* Hero */
 .hero {
   position: relative;
-  min-height: calc(100svh - 4.25rem);
-  min-height: calc(100dvh - 4.25rem);
+  min-height: calc(100svh - 5rem);
+  min-height: calc(100dvh - 5rem);
   display: flex;
   align-items: center;
   justify-content: center;
@@ -1009,8 +1007,8 @@
 }
 
 .footer-logo {
-  width: 3.5rem;
-  height: 3.5rem;
+  width: 5rem;
+  height: 5rem;
   object-fit: contain;
 }
 
@@ -1052,21 +1050,13 @@
 
   .header-inner {
     width: min(1180px, calc(100% - 2.5rem));
-    min-height: 5rem;
+    min-height: 5.75rem;
   }
 
   .brand-logo {
-    width: 4.25rem;
-    height: 4.25rem;
-  }
-
-  .brand-dz9 {
-    font-size: 1.25rem;
-  }
-
-  .brand-perf {
-    font-size: 0.7rem;
-    letter-spacing: 0.12em;
+    width: 7rem;
+    height: 7rem;
+    transform: scale(1.2);
   }
 
   .method-grid {
@@ -1161,7 +1151,7 @@
   }
 
   .header-inner {
-    min-height: 5.75rem;
+    min-height: 6.5rem;
   }
 
   .brand {
@@ -1169,17 +1159,9 @@
   }
 
   .brand-logo {
-    width: 5.25rem;
-    height: 5.25rem;
-  }
-
-  .brand-dz9 {
-    font-size: 1.35rem;
-  }
-
-  .brand-perf {
-    font-size: 0.72rem;
-    letter-spacing: 0.14em;
+    width: 8.5rem;
+    height: 8.5rem;
+    transform: scale(1.25);
   }
 
   .btn-primary,
@@ -1260,8 +1242,8 @@
   }
 
   .hero {
-    min-height: calc(100svh - 5.75rem);
-    min-height: calc(100dvh - 5.75rem);
+    min-height: calc(100svh - 6.5rem);
+    min-height: calc(100dvh - 6.5rem);
   }
 }
 

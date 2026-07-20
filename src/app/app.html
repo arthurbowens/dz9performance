@@ -159,8 +159,47 @@
         <header class="section-head">
           <span class="section-label">Metodologia</span>
           <h2>Método <span class="text-red">DZ9</span></h2>
-          <p>Ciência, disciplina e acompanhamento para evolução contínua.</p>
+          <p>
+            Tudo gira em torno de um tripé:
+            <strong>Treinamento + Alimentação + Mentalidade</strong>.
+          </p>
         </header>
+
+        <div class="tripod">
+          @for (item of tripod; track item.title; let last = $last) {
+            <div class="tripod-item">
+              <div class="tripod-icon" aria-hidden="true">
+                @switch (item.icon) {
+                  @case ('dumbbell') {
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round">
+                      <path d="M6.5 6.5v11M17.5 6.5v11M4 9v6M20 9v6M6.5 12h11M4 12H2.5M20 12h1.5" />
+                    </svg>
+                  }
+                  @case ('nutrition') {
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round">
+                      <path d="M3 2v7c0 1.1.9 2 2 2h4a2 2 0 0 0 2-2V2" />
+                      <path d="M7 2v20" />
+                      <path d="M21 15V2a5 5 0 0 0-5 5v6c0 1.1.9 2 2 2h3Zm0 0v7" />
+                    </svg>
+                  }
+                  @case ('brain') {
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round">
+                      <path d="M12 5a3 3 0 0 0-3-3 3.5 3.5 0 0 0-2.8 5.2A3.5 3.5 0 0 0 4 10.5V12a3 3 0 0 0 2 2.8V18a2 2 0 0 0 2 2h1" />
+                      <path d="M12 5a3 3 0 0 1 3-3 3.5 3.5 0 0 1 2.8 5.2A3.5 3.5 0 0 1 20 10.5V12a3 3 0 0 1-2 2.8V18a2 2 0 0 1-2 2h-1" />
+                      <path d="M12 5v16" />
+                    </svg>
+                  }
+                }
+              </div>
+              <h3>{{ item.title }}</h3>
+            </div>
+            @if (!last) {
+              <span class="tripod-plus" aria-hidden="true">+</span>
+            }
+          }
+        </div>
+
+        <p class="method-kicker">Na prática, o acompanhamento inclui:</p>
 
         <div class="method-grid">
           @for (point of methodPoints; track point.title; let i = $index) {
@@ -202,48 +241,14 @@
           }
         </div>
 
-        <div class="focus-row">
-          @for (focus of focuses; track focus) {
-            <span class="focus-chip">{{ focus }}</span>
-          }
-        </div>
-
-        <div class="tripod">
-          <p class="tripod-label">O Tripé DZ9</p>
-          <div class="tripod-grid">
-            @for (item of tripod; track item.title; let last = $last) {
-              <div class="tripod-item">
-                <div class="tripod-icon" aria-hidden="true">
-                  @switch (item.icon) {
-                    @case ('dumbbell') {
-                      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round">
-                        <path d="M6.5 6.5v11M17.5 6.5v11M4 9v6M20 9v6M6.5 12h11M4 12H2.5M20 12h1.5" />
-                      </svg>
-                    }
-                    @case ('nutrition') {
-                      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round">
-                        <path d="M3 2v7c0 1.1.9 2 2 2h4a2 2 0 0 0 2-2V2" />
-                        <path d="M7 2v20" />
-                        <path d="M21 15V2a5 5 0 0 0-5 5v6c0 1.1.9 2 2 2h3Zm0 0v7" />
-                      </svg>
-                    }
-                    @case ('brain') {
-                      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round">
-                        <path d="M12 5a3 3 0 0 0-3-3 3.5 3.5 0 0 0-2.8 5.2A3.5 3.5 0 0 0 4 10.5V12a3 3 0 0 0 2 2.8V18a2 2 0 0 0 2 2h1" />
-                        <path d="M12 5a3 3 0 0 1 3-3 3.5 3.5 0 0 1 2.8 5.2A3.5 3.5 0 0 1 20 10.5V12a3 3 0 0 1-2 2.8V18a2 2 0 0 1-2 2h-1" />
-                        <path d="M12 5v16" />
-                      </svg>
-                    }
-                  }
-                </div>
-                <h3>{{ item.title }}</h3>
-              </div>
-              @if (!last) {
-                <span class="tripod-plus" aria-hidden="true">+</span>
-              }
+        <p class="focus-line">
+          Foco em
+          @for (focus of focuses; track focus; let last = $last) {
+            <span>{{ focus }}</span>@if (!last) {
+              <span class="focus-sep" aria-hidden="true">·</span>
             }
-          </div>
-        </div>
+          }
+        </p>
       </div>
     </section>
 
@@ -255,24 +260,81 @@
           <p>Profissionais que evoluíram com a nossa metodologia.</p>
         </header>
 
-        <ul class="athletes-grid">
-          @for (athlete of athletes; track athlete.name) {
-            <li class="athlete-card">
-              <span class="athlete-index">{{ athlete.index }}</span>
-              <div class="athlete-icon" aria-hidden="true">
-                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round">
-                  <circle cx="12" cy="12" r="9" />
-                  <path d="M12 3c2.5 2.5 4 5.5 4 9s-1.5 6.5-4 9c-2.5-2.5-4-5.5-4-9s1.5-6.5 4-9Z" />
-                  <path d="M3.5 9h17M3.5 15h17" />
-                </svg>
-              </div>
-              <div>
-                <h3>{{ athlete.name }}</h3>
-                <p>{{ athlete.clubs }}</p>
-              </div>
-            </li>
-          }
-        </ul>
+        <div class="athletes-carousel">
+          <div class="athletes-controls">
+            <button
+              type="button"
+              class="athletes-nav"
+              aria-label="Atleta anterior"
+              [disabled]="athleteIndex() === 0"
+              (click)="prevAthlete()"
+            >
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true">
+                <path d="M15 18 9 12l6-6" />
+              </svg>
+            </button>
+            <button
+              type="button"
+              class="athletes-nav"
+              aria-label="Próximo atleta"
+              [disabled]="athleteIndex() === athletes.length - 1"
+              (click)="nextAthlete()"
+            >
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true">
+                <path d="m9 18 6-6-6-6" />
+              </svg>
+            </button>
+          </div>
+
+          <ul
+            #athletesTrack
+            class="athletes-track"
+            (scroll)="onAthletesScroll($event)"
+          >
+            @for (athlete of athletes; track athlete.name) {
+              <li class="athlete-card">
+                <div class="athlete-photo">
+                  <img
+                    [src]="athlete.photo"
+                    [alt]="athlete.name"
+                    width="400"
+                    height="500"
+                    loading="lazy"
+                    draggable="false"
+                  />
+                </div>
+                <div class="athlete-body">
+                  <h3>{{ athlete.name }}</h3>
+                  <p class="athlete-role">{{ athlete.role }}</p>
+                  <ul>
+                    @for (detail of athlete.details; track detail) {
+                      <li>
+                        <span class="bullet" aria-hidden="true"></span>
+                        {{ detail }}
+                      </li>
+                    }
+                  </ul>
+                </div>
+              </li>
+            }
+          </ul>
+
+          <div class="athletes-dots" role="tablist" aria-label="Navegação dos atletas">
+            @for (athlete of athletes; track athlete.name; let i = $index) {
+              <button
+                type="button"
+                class="athletes-dot"
+                role="tab"
+                [class.active]="athleteIndex() === i"
+                [attr.aria-label]="'Ir para ' + athlete.name"
+                [attr.aria-selected]="athleteIndex() === i"
+                (click)="goToAthlete(i)"
+              ></button>
+            }
+          </div>
+
+          <p class="athletes-hint">Arraste para o lado</p>
+        </div>
       </div>
     </section>
 

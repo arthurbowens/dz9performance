@@ -570,7 +570,22 @@
   box-shadow: 0 0 8px rgba(227, 27, 35, 0.6);
 }
 
+.section-head p strong {
+  color: #fff;
+  font-weight: 600;
+}
+
 /* Method */
+.method-kicker {
+  margin: 2.25rem 0 1rem;
+  font-family: var(--font-display);
+  font-size: 0.78rem;
+  font-weight: 700;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+  color: var(--muted);
+}
+
 .method-grid {
   display: grid;
   gap: 1rem;
@@ -578,33 +593,16 @@
 
 .method-card {
   position: relative;
-  padding: 1.65rem 1.35rem 1.5rem;
+  padding: 1.5rem 1.25rem 1.35rem;
   background: var(--card);
   border: 1px solid var(--border);
   overflow: hidden;
-  transition: border-color 0.25s ease, transform 0.25s ease, box-shadow 0.25s ease;
-}
-
-.method-card::before {
-  content: '';
-  position: absolute;
-  top: 0;
-  left: 0;
-  right: 0;
-  height: 3px;
-  background: linear-gradient(90deg, var(--red), transparent);
-  opacity: 0;
-  transition: opacity 0.25s ease;
+  transition: border-color 0.25s ease, transform 0.25s ease;
 }
 
 .method-card:hover {
   border-color: rgba(227, 27, 35, 0.45);
-  transform: translateY(-4px);
-  box-shadow: 0 16px 32px rgba(0, 0, 0, 0.3);
-}
-
-.method-card:hover::before {
-  opacity: 1;
+  transform: translateY(-3px);
 }
 
 .method-num {
@@ -612,196 +610,287 @@
   top: 0.9rem;
   right: 1rem;
   font-family: var(--font-display);
-  font-size: 2rem;
+  font-size: 1.75rem;
   font-weight: 800;
   color: rgba(227, 27, 35, 0.18);
   line-height: 1;
 }
 
 .method-icon {
-  width: 3rem;
-  height: 3rem;
+  width: 2.75rem;
+  height: 2.75rem;
   display: grid;
   place-items: center;
-  margin-bottom: 1.1rem;
+  margin-bottom: 1rem;
   color: var(--red);
   background: rgba(227, 27, 35, 0.08);
-  border: 1px solid rgba(227, 27, 35, 0.3);
+  border: 1px solid rgba(227, 27, 35, 0.28);
 }
 
 .method-icon svg {
-  width: 1.45rem;
-  height: 1.45rem;
+  width: 1.35rem;
+  height: 1.35rem;
 }
 
 .method-card h3 {
   margin: 0;
   font-family: var(--font-display);
-  font-size: 1.05rem;
+  font-size: 1.02rem;
   font-weight: 700;
   letter-spacing: 0.03em;
   text-transform: uppercase;
 }
 
 .method-card p {
-  margin: 0.6rem 0 0;
+  margin: 0.55rem 0 0;
   color: var(--muted);
   font-size: 0.95rem;
   line-height: 1.55;
 }
 
-.focus-row {
-  display: flex;
-  flex-wrap: wrap;
-  gap: 0.7rem;
-  margin-top: 2.25rem;
-}
-
-.focus-chip {
-  font-family: var(--font-display);
-  font-size: 0.78rem;
-  font-weight: 700;
-  letter-spacing: 0.12em;
-  text-transform: uppercase;
-  padding: 0.65rem 1rem;
-  border: 1px solid rgba(227, 27, 35, 0.35);
-  color: #fff;
-  background: rgba(227, 27, 35, 0.08);
-}
-
 .tripod {
-  margin-top: 2.25rem;
-  padding: 1.75rem 1rem;
-  border: 1px dashed rgba(227, 27, 35, 0.5);
-  background:
-    radial-gradient(ellipse at center, rgba(227, 27, 35, 0.1), transparent 70%),
-    rgba(227, 27, 35, 0.03);
-  text-align: center;
-}
-
-.tripod-label {
-  margin: 0 0 1.75rem;
-  font-family: var(--font-display);
-  font-size: 0.8rem;
-  font-weight: 700;
-  letter-spacing: 0.24em;
-  text-transform: uppercase;
-  color: var(--red);
-}
-
-.tripod-grid {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  gap: 1.15rem;
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 0.85rem;
+  margin-top: 0.25rem;
 }
 
 .tripod-item {
   display: flex;
-  flex-direction: column;
   align-items: center;
-  gap: 0.75rem;
+  gap: 0.9rem;
+  padding: 1rem 1.1rem;
+  background: var(--card);
+  border: 1px solid var(--border);
+  border-left: 3px solid var(--red);
 }
 
 .tripod-icon {
-  width: 3.75rem;
-  height: 3.75rem;
+  width: 2.5rem;
+  height: 2.5rem;
   display: grid;
   place-items: center;
+  flex-shrink: 0;
   color: var(--red);
-  background: rgba(0, 0, 0, 0.35);
-  border: 1px solid rgba(227, 27, 35, 0.45);
-  box-shadow: 0 0 24px rgba(227, 27, 35, 0.15);
+  background: rgba(227, 27, 35, 0.08);
+  border: 1px solid rgba(227, 27, 35, 0.3);
 }
 
 .tripod-icon svg {
-  width: 1.65rem;
-  height: 1.65rem;
+  width: 1.25rem;
+  height: 1.25rem;
 }
 
 .tripod-item h3 {
   margin: 0;
   font-family: var(--font-display);
-  font-size: 1.15rem;
+  font-size: 1rem;
   font-weight: 800;
   letter-spacing: 0.06em;
   text-transform: uppercase;
 }
 
 .tripod-plus {
+  display: none;
+}
+
+.focus-line {
+  margin: 1.75rem 0 0;
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 0.45rem 0.55rem;
+  font-size: 0.92rem;
+  color: var(--muted);
+}
+
+.focus-line span:not(.focus-sep) {
   font-family: var(--font-display);
-  font-size: 1.6rem;
-  font-weight: 800;
+  font-size: 0.78rem;
+  font-weight: 700;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: #e5e5e5;
+}
+
+.focus-sep {
   color: var(--red);
 }
 
-/* Athletes */
-.athletes-grid {
+/* Athletes carousel */
+.athletes-carousel {
+  position: relative;
+}
+
+.athletes-controls {
+  display: none;
+  justify-content: flex-end;
+  gap: 0.55rem;
+  margin-bottom: 1rem;
+}
+
+.athletes-nav {
+  width: 2.75rem;
+  height: 2.75rem;
+  display: grid;
+  place-items: center;
+  background: var(--card);
+  border: 1px solid var(--border);
+  color: #fff;
+  cursor: pointer;
+  transition: border-color 0.2s ease, background 0.2s ease, opacity 0.2s ease;
+}
+
+.athletes-nav svg {
+  width: 1.2rem;
+  height: 1.2rem;
+}
+
+.athletes-nav:hover:not(:disabled) {
+  border-color: rgba(227, 27, 35, 0.55);
+  background: rgba(227, 27, 35, 0.1);
+}
+
+.athletes-nav:disabled {
+  opacity: 0.35;
+  cursor: not-allowed;
+}
+
+.athletes-track {
+  margin: 0;
+  padding: 0 0 0.5rem;
+  list-style: none;
+  display: flex;
+  gap: 1rem;
+  overflow-x: auto;
+  overflow-y: hidden;
+  scroll-snap-type: x mandatory;
+  scroll-behavior: smooth;
+  -webkit-overflow-scrolling: touch;
+  touch-action: pan-x;
+  overscroll-behavior-x: contain;
+  scrollbar-width: none;
+  cursor: grab;
+}
+
+.athletes-track::-webkit-scrollbar {
+  display: none;
+}
+
+.athletes-track:active {
+  cursor: grabbing;
+}
+
+.athlete-card {
+  flex: 0 0 min(82vw, 300px);
+  scroll-snap-align: start;
+  display: grid;
+  gap: 0;
+  background: var(--card);
+  border: 1px solid var(--border);
+  overflow: hidden;
+  transition: border-color 0.25s ease;
+  user-select: none;
+}
+
+.athlete-card:hover {
+  border-color: rgba(227, 27, 35, 0.45);
+}
+
+.athlete-photo {
+  aspect-ratio: 4 / 5;
+  overflow: hidden;
+  background: #080808;
+  border-bottom: 1px solid rgba(227, 27, 35, 0.25);
+}
+
+.athlete-photo img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: center top;
+  display: block;
+  pointer-events: none;
+  transition: transform 0.4s ease;
+}
+
+.athlete-card:hover .athlete-photo img {
+  transform: scale(1.04);
+}
+
+.athlete-body {
+  padding: 1.1rem 1.15rem 1.25rem;
+}
+
+.athlete-body h3 {
+  margin: 0;
+  font-family: var(--font-display);
+  font-size: clamp(1.1rem, 4vw, 1.3rem);
+  font-weight: 800;
+  letter-spacing: 0.02em;
+  text-transform: uppercase;
+}
+
+.athlete-role {
+  margin: 0.35rem 0 0.85rem;
+  font-family: var(--font-display);
+  font-size: 0.75rem;
+  font-weight: 700;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: var(--red);
+}
+
+.athlete-body ul {
   margin: 0;
   padding: 0;
   list-style: none;
   display: grid;
-  gap: 0.9rem;
+  gap: 0.45rem;
 }
 
-.athlete-card {
-  position: relative;
+.athlete-body li {
   display: flex;
   align-items: flex-start;
-  gap: 0.85rem;
-  padding: 1.05rem 0.95rem 1.05rem 0.95rem;
-  background: var(--card);
-  border: 1px solid var(--border);
-  transition: border-color 0.2s ease, background 0.2s ease, transform 0.2s ease;
+  gap: 0.6rem;
+  color: #d4d4d4;
+  font-size: 0.92rem;
+  line-height: 1.4;
 }
 
-.athlete-card:hover {
-  background: #161616;
-  border-color: rgba(227, 27, 35, 0.4);
-  transform: translateX(4px);
+.athletes-dots {
+  display: flex;
+  justify-content: center;
+  gap: 0.5rem;
+  margin-top: 1.25rem;
 }
 
-.athlete-index {
-  position: absolute;
-  top: 0.65rem;
-  right: 0.85rem;
+.athletes-dot {
+  width: 0.55rem;
+  height: 0.55rem;
+  padding: 0;
+  border: none;
+  border-radius: 50%;
+  background: rgba(255, 255, 255, 0.25);
+  cursor: pointer;
+  transition: background 0.2s ease, transform 0.2s ease;
+}
+
+.athletes-dot.active {
+  background: var(--red);
+  transform: scale(1.2);
+}
+
+.athletes-hint {
+  display: block;
+  margin: 0.85rem 0 0;
+  text-align: center;
   font-family: var(--font-display);
-  font-size: 0.75rem;
-  font-weight: 800;
-  letter-spacing: 0.08em;
-  color: rgba(227, 27, 35, 0.45);
-}
-
-.athlete-icon {
-  flex-shrink: 0;
-  width: 2.35rem;
-  height: 2.35rem;
-  color: var(--red);
-  margin-top: 0.1rem;
-}
-
-.athlete-icon svg {
-  width: 100%;
-  height: 100%;
-}
-
-.athlete-card h3 {
-  margin: 0;
-  font-family: var(--font-display);
-  font-size: clamp(0.95rem, 3.8vw, 1.08rem);
-  font-weight: 800;
-  letter-spacing: 0.02em;
+  font-size: 0.7rem;
+  font-weight: 600;
+  letter-spacing: 0.14em;
   text-transform: uppercase;
-  padding-right: 1.75rem;
-}
-
-.athlete-card p {
-  margin: 0.35rem 0 0;
   color: var(--muted);
-  font-size: 0.86rem;
-  line-height: 1.5;
-  padding-right: 0.5rem;
-  word-break: break-word;
 }
 
 /* CTA */
@@ -984,14 +1073,40 @@
     grid-template-columns: repeat(2, 1fr);
   }
 
-  .athletes-grid {
-    grid-template-columns: repeat(2, 1fr);
+  .athletes-controls {
+    display: flex;
   }
 
-  .tripod-grid {
-    flex-direction: row;
+  .athlete-card {
+    flex-basis: min(46%, 340px);
+  }
+
+  .athletes-hint {
+    display: none;
+  }
+
+  .tripod {
+    grid-template-columns: 1fr auto 1fr auto 1fr;
+    align-items: stretch;
+    gap: 0.75rem;
+  }
+
+  .tripod-item {
+    flex-direction: column;
+    text-align: center;
     justify-content: center;
-    gap: 1.75rem;
+    padding: 1.25rem 1rem;
+    border-left: 1px solid var(--border);
+    border-top: 3px solid var(--red);
+  }
+
+  .tripod-plus {
+    display: grid;
+    place-items: center;
+    font-family: var(--font-display);
+    font-size: 1.35rem;
+    font-weight: 800;
+    color: var(--red);
   }
 
   .hero {
@@ -1134,6 +1249,10 @@
 @media (min-width: 1024px) {
   .method-grid {
     grid-template-columns: repeat(4, 1fr);
+  }
+
+  .athlete-card {
+    flex-basis: min(32%, 320px);
   }
 
   .section {

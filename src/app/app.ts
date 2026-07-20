@@ -1,4 +1,4 @@
-import { Component, HostListener, signal } from '@angular/core';
+import { Component, ElementRef, HostListener, viewChild, signal } from '@angular/core';
 
 @Component({
   selector: 'app-root',
@@ -9,6 +9,9 @@ import { Component, HostListener, signal } from '@angular/core';
 export class App {
   protected readonly currentYear = new Date().getFullYear();
   protected readonly menuOpen = signal(false);
+  protected readonly athleteIndex = signal(0);
+
+  private readonly athletesTrack = viewChild<ElementRef<HTMLElement>>('athletesTrack');
 
   protected readonly navLinks = [
     { href: '#quem-somos', label: 'Quem Somos' },
@@ -62,18 +65,37 @@ export class App {
   ];
 
   protected readonly athletes = [
-    { name: 'Bernardo', clubs: 'Grêmio • São José' },
-    { name: 'Da Silva', clubs: 'Grêmio • Juventude • Novo Hamburgo • Turquia' },
-    { name: 'Henry Douglas', clubs: 'Grêmio • Emirados Árabes' },
-    { name: 'Viery', clubs: 'Grêmio • Fiorentina' },
-    { name: 'Luizão', clubs: 'Grêmio • Juventude • Fortaleza • Seleção Brasileira de Base' },
-    { name: 'Nathan Fernandes', clubs: 'Grêmio • Botafogo' },
-    { name: 'Kauan Kelvin', clubs: 'Grêmio • Braga' },
-    { name: 'Benjamim Bagetti', clubs: 'Novo Hamburgo • Real Murcia' },
-  ].map((athlete, index) => ({
-    ...athlete,
-    index: String(index + 1).padStart(2, '0'),
-  }));
+    {
+      name: 'Viery',
+      role: 'Atleta profissional',
+      details: ['Grêmio', 'Atualmente Fiorentina (Itália)'],
+      photo: '/viery.jpeg',
+    },
+    {
+      name: 'Kauan Kelvin',
+      role: 'Atleta profissional',
+      details: ['Grêmio', 'Seleção Brasileira de Base', 'Atualmente Braga (Portugal)'],
+      photo: '/kauankevin.jpeg',
+    },
+    {
+      name: 'Benjamim',
+      role: 'Atleta profissional',
+      details: ['Novo Hamburgo', 'Atualmente Real Murcia (Espanha)'],
+      photo: '/benjamin.jpeg',
+    },
+    {
+      name: 'Luizão',
+      role: 'Atleta profissional',
+      details: ['Grêmio', 'Seleção Brasileira de Base', 'Fortaleza'],
+      photo: '/luizao.jpeg',
+    },
+    {
+      name: 'Nathan Fernandes',
+      role: 'Atleta profissional',
+      details: ['Grêmio', 'Atualmente Botafogo'],
+      photo: '/nathan.jpeg',
+    },
+  ];
 
   toggleMenu(): void {
     this.menuOpen.update((open) => !open);
@@ -83,6 +105,43 @@ export class App {
   closeMenu(): void {
     this.menuOpen.set(false);
     this.syncBodyScroll();
+  }
+
+  onAthletesScroll(event: Event): void {
+    const track = event.target as HTMLElement;
+    const card = track.querySelector('.athlete-card') as HTMLElement | null;
+    if (!card) return;
+
+    const gap = parseFloat(getComputedStyle(track).gap || '0') || 0;
+    const cardWidth = card.offsetWidth + gap;
+    if (cardWidth <= 0) return;
+
+    const index = Math.round(track.scrollLeft / cardWidth);
+    const clamped = Math.max(0, Math.min(index, this.athletes.length - 1));
+    this.athleteIndex.set(clamped);
+  }
+
+  goToAthlete(index: number): void {
+    const track = this.athletesTrack()?.nativeElement;
+    if (!track) return;
+
+    const card = track.querySelector('.athlete-card') as HTMLElement | null;
+    if (!card) return;
+
+    const gap = parseFloat(getComputedStyle(track).gap || '0') || 0;
+    const cardWidth = card.offsetWidth + gap;
+    track.scrollTo({ left: cardWidth * index, behavior: 'smooth' });
+    this.athleteIndex.set(index);
+  }
+
+  prevAthlete(): void {
+    const next = Math.max(0, this.athleteIndex() - 1);
+    this.goToAthlete(next);
+  }
+
+  nextAthlete(): void {
+    const next = Math.min(this.athletes.length - 1, this.athleteIndex() + 1);
+    this.goToAthlete(next);
   }
 
   @HostListener('window:resize')

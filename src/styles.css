@@ -1,3 +1,31 @@
-/* You can add global styles to this file, and also import other style files */
-
 @import "tailwindcss";
+
+@theme {
+  --color-dz9-black: #030303;
+  --color-dz9-surface: #0b0b0b;
+  --color-dz9-card: #121212;
+  --color-dz9-border: #2a2a2a;
+  --color-dz9-red: #e31b23;
+  --color-dz9-red-dark: #a81218;
+  --color-dz9-muted: #9ca3af;
+  --font-display: "Archivo", sans-serif;
+  --font-body: "Outfit", sans-serif;
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  margin: 0;
+  background: #030303;
+  color: #fff;
+  font-family: var(--font-body);
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+::selection {
+  background: color-mix(in srgb, #e31b23 45%, transparent);
+  color: #fff;
+}

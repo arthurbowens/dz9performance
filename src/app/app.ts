@@ -13,9 +13,15 @@ export class App {
 
   private readonly athletesTrack = viewChild<ElementRef<HTMLElement>>('athletesTrack');
 
+  protected readonly whatsappUrl =
+    'https://wa.me/555185679046?text=' +
+    encodeURIComponent(
+      'Olá! Vim pelo site da DZ9 Performance e quero saber mais sobre o método e os programas.',
+    );
+
   protected readonly navLinks = [
     { href: '#quem-somos', label: 'Quem Somos' },
-        { href: '#metodo', label: 'Método' },
+    { href: '#metodo', label: 'Método' },
     { href: '#jornada', label: 'Jornada' },
     { href: '#atletas', label: 'Atletas' },
     { href: '#contato', label: 'Contato' },

@@ -10,6 +10,12 @@ export class App {
   protected readonly currentYear = new Date().getFullYear();
   protected readonly menuOpen = signal(false);
   protected readonly athleteIndex = signal(0);
+  protected readonly resultIndex = signal<Record<string, number>>({
+    vanessa: 0,
+    natalie: 0,
+    ricardo: 0,
+    jorge: 0,
+  });
 
   private readonly athletesTrack = viewChild<ElementRef<HTMLElement>>('athletesTrack');
 
@@ -24,6 +30,7 @@ export class App {
     { href: '#metodo', label: 'Método' },
     { href: '#jornada', label: 'Jornada' },
     { href: '#atletas', label: 'Atletas' },
+    { href: '#resultados', label: 'Resultados' },
     { href: '#contato', label: 'Contato' },
   ];
 
@@ -128,6 +135,78 @@ export class App {
     },
   ];
 
+  protected readonly resultPeople = [
+    {
+      id: 'vanessa',
+      name: 'Vanessa',
+      pairs: [
+        {
+          pose: 'Frente',
+          before: '/vanessa1antes.jpeg',
+          after: '/vanessa2dps.jpeg',
+        },
+        {
+          pose: 'Perfil',
+          before: '/vanessa2antes.jpeg',
+          after: '/vanessa3dps.jpeg',
+        },
+        {
+          pose: 'Costas',
+          before: '/vanessa3antes.jpeg',
+          after: '/vanessa4dps.jpeg',
+        },
+        {
+          pose: 'Perfil',
+          before: '/vanessa4antes.jpeg',
+          after: '/vanessa1dps.jpeg',
+        },
+      ],
+    },
+    {
+      id: 'natalie',
+      name: 'Natalie',
+      pairs: [
+        {
+          pose: 'Frente',
+          before: '/natalie2antes.jpeg',
+          after: '/natalie1dps.jpeg',
+        },
+        {
+          pose: 'Perfil',
+          before: '/natalie3antes.jpeg',
+          after: '/natalie2dps.jpeg',
+        },
+      ],
+    },
+    {
+      id: 'ricardo',
+      name: 'Ricardo',
+      pairs: [
+        {
+          pose: 'Frente',
+          before: '/ricardoantes.jpeg',
+          after: '/ricardodps.jpeg',
+        },
+      ],
+    },
+    {
+      id: 'jorge',
+      name: 'Jorge',
+      pairs: [
+        {
+          pose: 'Transformação',
+          before: '/jorge1antes.jpeg',
+          after: '/jorge1dps.jpeg',
+        },
+        {
+          pose: 'Transformação',
+          before: '/jorge2antes.jpeg',
+          after: '/jorge2dps.jpeg',
+        },
+      ],
+    },
+  ];
+
   toggleMenu(): void {
     this.menuOpen.update((open) => !open);
     this.syncBodyScroll();
@@ -173,6 +252,50 @@ export class App {
   nextAthlete(): void {
     const next = Math.min(this.athletes.length - 1, this.athleteIndex() + 1);
     this.goToAthlete(next);
+  }
+
+  onResultsScroll(personId: string, event: Event): void {
+    const person = this.resultPeople.find((item) => item.id === personId);
+    if (!person) return;
+
+    const track = event.target as HTMLElement;
+    const card = track.querySelector('.result-card') as HTMLElement | null;
+    if (!card) return;
+
+    const gap = parseFloat(getComputedStyle(track).gap || '0') || 0;
+    const cardWidth = card.offsetWidth + gap;
+    if (cardWidth <= 0) return;
+
+    const index = Math.round(track.scrollLeft / cardWidth);
+    const clamped = Math.max(0, Math.min(index, person.pairs.length - 1));
+    this.resultIndex.update((state) => ({ ...state, [personId]: clamped }));
+  }
+
+  goToResult(personId: string, index: number): void {
+    if (typeof document === 'undefined') return;
+
+    const track = document.getElementById(`results-track-${personId}`);
+    if (!track) return;
+
+    const card = track.querySelector('.result-card') as HTMLElement | null;
+    if (!card) return;
+
+    const gap = parseFloat(getComputedStyle(track).gap || '0') || 0;
+    const cardWidth = card.offsetWidth + gap;
+    track.scrollTo({ left: cardWidth * index, behavior: 'smooth' });
+    this.resultIndex.update((state) => ({ ...state, [personId]: index }));
+  }
+
+  prevResult(personId: string): void {
+    const current = this.resultIndex()[personId] ?? 0;
+    this.goToResult(personId, Math.max(0, current - 1));
+  }
+
+  nextResult(personId: string): void {
+    const person = this.resultPeople.find((item) => item.id === personId);
+    if (!person) return;
+    const current = this.resultIndex()[personId] ?? 0;
+    this.goToResult(personId, Math.min(person.pairs.length - 1, current + 1));
   }
 
   @HostListener('window:resize')

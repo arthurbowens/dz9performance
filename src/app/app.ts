@@ -15,7 +15,8 @@ export class App {
 
   protected readonly navLinks = [
     { href: '#quem-somos', label: 'Quem Somos' },
-    { href: '#metodo', label: 'Método' },
+        { href: '#metodo', label: 'Método' },
+    { href: '#jornada', label: 'Jornada' },
     { href: '#atletas', label: 'Atletas' },
     { href: '#contato', label: 'Contato' },
   ];
@@ -33,35 +34,59 @@ export class App {
     'Foco em hipertrofia, emagrecimento e técnica',
   ];
 
-  protected readonly methodPoints = [
+  protected readonly pillars = [
     {
-      title: 'Treinamento personalizado',
-      description: 'Baseado em evidências científicas',
-      icon: 'dumbbell',
+      title: 'Mentalidade de atleta',
+      description:
+        'Criação de disciplina blindada, constância inabalável e mudança profunda de hábitos diários.',
     },
     {
-      title: 'Planejamento individual',
-      description: 'Protocolo sob medida para o seu objetivo',
-      icon: 'clipboard',
+      title: 'Treinamento estratégico',
+      description:
+        'Periodização inteligente e totalmente individualizada baseada em objetivos claros de estética e performance.',
     },
     {
-      title: 'Acompanhamento contínuo',
-      description: 'Evolução monitorada de perto',
-      icon: 'chart',
+      title: 'Alimentação limpa',
+      description:
+        'Foco estratégico em alimentos de verdade, nutrientes naturais e direcionamento preciso de macronutrientes.',
     },
     {
-      title: 'Correção técnica',
-      description: 'Execução precisa e segura',
-      icon: 'target',
+      title: 'Intensidade progressiva',
+      description:
+        'Evolução constante de cargas, aumento controlado de volume semanal e aplicação de técnicas primárias e avançadas.',
+    },
+    {
+      title: 'Acompanhamento ativo',
+      description:
+        'Avaliações físicas periódicas, feedbacks constantes e correções cirúrgicas semanais de toda a estratégia.',
     },
   ];
 
-  protected readonly focuses = ['Performance', 'Saúde', 'Hipertrofia', 'Longevidade'];
+  protected readonly levels = [
+    {
+      name: 'DZ9 Start',
+      tone: 'start',
+      description:
+        'Direcionado para iniciantes. Foco total em emagrecimento ativo, adaptação neuromuscular ao treinamento e criação sólida de uma nova rotina saudável.',
+    },
+    {
+      name: 'DZ9 Pro',
+      tone: 'pro',
+      description:
+        'Nível intermediário. Foco em hipertrofia acelerada, recomposição corporal eficiente (ganhar massa e perder gordura) e aplicação de intensidade progressiva.',
+    },
+    {
+      name: 'DZ9 Elite',
+      tone: 'elite',
+      description:
+        'Nível avançado. Foco em máxima performance esportiva, definição muscular extrema e aplicação de técnicas avançadas com o acompanhamento mais próximo da equipe.',
+    },
+  ];
 
   protected readonly tripod = [
-    { title: 'Treinamento', icon: 'dumbbell' },
+    { title: 'Treino', icon: 'dumbbell' },
     { title: 'Alimentação', icon: 'nutrition' },
-    { title: 'Mentalidade', icon: 'brain' },
+    { title: 'Mental', icon: 'brain' },
   ];
 
   protected readonly athletes = [

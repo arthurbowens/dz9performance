@@ -157,12 +157,9 @@
     <section id="metodo" class="section section-alt">
       <div class="container">
         <header class="section-head">
-          <span class="section-label">Metodologia</span>
-          <h2>Método <span class="text-red">DZ9</span></h2>
-          <p>
-            Tudo gira em torno de um tripé:
-            <strong>Treinamento + Alimentação + Mentalidade</strong>.
-          </p>
+          <span class="section-label">Método DZ9 Performance</span>
+          <h2>Sistema de transformação física de <span class="text-red">alta performance</span></h2>
+          <p class="method-quote">“Disciplina hoje, resultados para sempre.”</p>
         </header>
 
         <div class="tripod">
@@ -199,56 +196,64 @@
           }
         </div>
 
-        <p class="method-kicker">Na prática, o acompanhamento inclui:</p>
+        <header class="section-head pillars-head">
+          <h2>O método e seus <span class="text-red">5 pilares</span> fundamentais</h2>
+        </header>
 
-        <div class="method-grid">
-          @for (point of methodPoints; track point.title; let i = $index) {
-            <article class="method-card">
-              <span class="method-num">0{{ i + 1 }}</span>
-              <div class="method-icon" aria-hidden="true">
-                @switch (point.icon) {
-                  @case ('dumbbell') {
-                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round">
-                      <path d="M6.5 6.5v11M17.5 6.5v11M4 9v6M20 9v6M6.5 12h11M4 12H2.5M20 12h1.5" />
-                    </svg>
-                  }
-                  @case ('clipboard') {
-                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round">
-                      <path d="M9 5H7a2 2 0 0 0-2 2v12a2 2 0 0 0 2 2h10a2 2 0 0 0 2-2V7a2 2 0 0 0-2-2h-2" />
-                      <rect x="9" y="3" width="6" height="4" rx="1" />
-                      <path d="M9 12h6M9 16h4" />
-                    </svg>
-                  }
-                  @case ('chart') {
-                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round">
-                      <path d="M4 19V5M4 19h16" />
-                      <path d="M8 16v-5M12 16V8M16 16v-8" />
-                      <path d="M8 8l4-3 4 4 3-2" />
-                    </svg>
-                  }
-                  @case ('target') {
-                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round">
-                      <circle cx="12" cy="12" r="8" />
-                      <circle cx="12" cy="12" r="4" />
-                      <circle cx="12" cy="12" r="1.5" fill="currentColor" stroke="none" />
-                    </svg>
-                  }
-                }
-              </div>
-              <h3>{{ point.title }}</h3>
-              <p>{{ point.description }}</p>
+        <div class="pillars-grid">
+          @for (pillar of pillars; track pillar.title; let i = $index) {
+            <article class="pillar-card">
+              <span class="pillar-num">0{{ i + 1 }}</span>
+              <h3>{{ pillar.title }}</h3>
+              <p>{{ pillar.description }}</p>
             </article>
           }
         </div>
 
-        <p class="focus-line">
-          Foco em
-          @for (focus of focuses; track focus; let last = $last) {
-            <span>{{ focus }}</span>@if (!last) {
-              <span class="focus-sep" aria-hidden="true">·</span>
-            }
+        <aside class="mobility-banner">
+          <h3>A importância vital da mobilidade</h3>
+          <p>
+            Integrada diretamente na metodologia para garantir a melhora significativa da postura,
+            aumento da amplitude articular nas execuções e prevenção ativa de lesões.
+          </p>
+        </aside>
+      </div>
+    </section>
+
+    <section id="jornada" class="section">
+      <div class="container">
+        <header class="section-head">
+          <span class="section-label">Programas</span>
+          <h2>Sua jornada de <span class="text-red">evolução</span></h2>
+        </header>
+
+        <div class="promise-box">
+          <p>
+            Promessa do método: transformar alunos comuns em pessoas com físico e mente de
+            <strong>alta performance</strong>.
+          </p>
+        </div>
+
+        <div class="levels-grid">
+          @for (level of levels; track level.name) {
+            <article class="level-card" [attr.data-tone]="level.tone">
+              <h3>{{ level.name }}</h3>
+              <p>{{ level.description }}</p>
+            </article>
           }
-        </p>
+        </div>
+
+        <div class="journey-footer">
+          <div class="journey-quote">
+            <p>
+              “O que não te <em>desafia</em>, não te <em>transforma</em>.”
+            </p>
+            <p class="journey-sub">
+              Escolha evoluir hoje mesmo. Agende sua avaliação inicial com nossa equipe.
+            </p>
+          </div>
+          <a href="#contato" class="btn-primary">Começar minha transformação</a>
+        </div>
       </div>
     </section>
 

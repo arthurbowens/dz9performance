@@ -220,43 +220,6 @@
       </div>
     </section>
 
-    <section id="jornada" class="section">
-      <div class="container">
-        <header class="section-head">
-          <span class="section-label">Programas</span>
-          <h2>Sua jornada de <span class="text-red">evolução</span></h2>
-        </header>
-
-        <div class="promise-box">
-          <p>
-            Promessa do método: transformar alunos comuns em pessoas com físico e mente de
-            <strong>alta performance</strong>.
-          </p>
-        </div>
-
-        <div class="levels-grid">
-          @for (level of levels; track level.name) {
-            <article class="level-card" [attr.data-tone]="level.tone">
-              <h3>{{ level.name }}</h3>
-              <p>{{ level.description }}</p>
-            </article>
-          }
-        </div>
-
-        <div class="journey-footer">
-          <div class="journey-quote">
-            <p>
-              “O que não te <em>desafia</em>, não te <em>transforma</em>.”
-            </p>
-            <p class="journey-sub">
-              Escolha evoluir hoje mesmo. Agende sua avaliação inicial com nossa equipe.
-            </p>
-          </div>
-          <a [href]="whatsappUrl" class="btn-primary" target="_blank" rel="noopener noreferrer">Começar minha transformação</a>
-        </div>
-      </div>
-    </section>
-
     <section id="atletas" class="section">
       <div class="container">
         <header class="section-head">
@@ -362,7 +325,7 @@
                       type="button"
                       class="athletes-nav"
                       aria-label="Resultado anterior"
-                      [disabled]="(resultIndex()[person.id] ?? 0) === 0"
+                      [disabled]="resultIdx(person.id) === 0"
                       (click)="prevResult(person.id)"
                     >
                       <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true">
@@ -373,7 +336,7 @@
                       type="button"
                       class="athletes-nav"
                       aria-label="Próximo resultado"
-                      [disabled]="(resultIndex()[person.id] ?? 0) === person.pairs.length - 1"
+                      [disabled]="resultIdx(person.id) === person.pairs.length - 1"
                       (click)="nextResult(person.id)"
                     >
                       <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true">
@@ -430,9 +393,9 @@
                         type="button"
                         class="athletes-dot"
                         role="tab"
-                        [class.active]="(resultIndex()[person.id] ?? 0) === i"
+                        [class.active]="resultIdx(person.id) === i"
                         [attr.aria-label]="person.name + ' foto ' + (i + 1)"
-                        [attr.aria-selected]="(resultIndex()[person.id] ?? 0) === i"
+                        [attr.aria-selected]="resultIdx(person.id) === i"
                         (click)="goToResult(person.id, i)"
                       ></button>
                     }

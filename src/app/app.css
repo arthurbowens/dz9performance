@@ -649,108 +649,6 @@
   color: rgba(255, 255, 255, 0.92);
 }
 
-.promise-box {
-  margin-bottom: 1.5rem;
-  padding: 1.15rem 1.2rem;
-  border: 1px dashed rgba(227, 27, 35, 0.55);
-  background: rgba(227, 27, 35, 0.05);
-}
-
-.promise-box p {
-  margin: 0;
-  font-family: var(--font-display);
-  font-size: clamp(0.85rem, 2.8vw, 1rem);
-  font-weight: 600;
-  letter-spacing: 0.06em;
-  text-transform: uppercase;
-  line-height: 1.55;
-  color: #e5e5e5;
-  text-align: center;
-}
-
-.promise-box strong {
-  color: #fff;
-}
-
-.levels-grid {
-  display: grid;
-  gap: 0.85rem;
-}
-
-.level-card {
-  padding: 1.35rem 1.2rem;
-  background: var(--card);
-  border: 1px solid var(--border);
-  border-top: 4px solid #f58220;
-}
-
-.level-card[data-tone='pro'] {
-  border-top-color: #cfcfcf;
-}
-
-.level-card[data-tone='elite'] {
-  border-top-color: #ffcc00;
-}
-
-.level-card h3 {
-  margin: 0;
-  font-family: var(--font-display);
-  font-size: 1.15rem;
-  font-weight: 800;
-  letter-spacing: 0.06em;
-  text-transform: uppercase;
-  color: #f58220;
-}
-
-.level-card[data-tone='pro'] h3 {
-  color: #d4d4d4;
-}
-
-.level-card[data-tone='elite'] h3 {
-  color: #ffcc00;
-}
-
-.level-card p {
-  margin: 0.7rem 0 0;
-  color: var(--muted);
-  font-size: 0.95rem;
-  line-height: 1.55;
-}
-
-.journey-footer {
-  margin-top: 2rem;
-  display: grid;
-  gap: 1.25rem;
-}
-
-.journey-quote p {
-  margin: 0;
-  font-size: clamp(1.05rem, 3.5vw, 1.35rem);
-  font-style: italic;
-  font-weight: 500;
-  line-height: 1.45;
-}
-
-.journey-quote em {
-  font-style: italic;
-  font-weight: 700;
-  color: var(--red);
-}
-
-.journey-sub {
-  margin-top: 0.75rem !important;
-  color: var(--muted) !important;
-  font-size: 0.92rem !important;
-  font-style: normal !important;
-  font-weight: 400 !important;
-  line-height: 1.5 !important;
-}
-
-.journey-footer .btn-primary {
-  width: 100%;
-  text-align: center;
-}
-
 /* Tripod */
 .tripod {
   display: grid;
@@ -1272,10 +1170,6 @@
     grid-template-columns: repeat(2, 1fr);
   }
 
-  .levels-grid {
-    grid-template-columns: repeat(3, 1fr);
-  }
-
   .athletes-controls {
     display: flex;
   }
@@ -1318,16 +1212,6 @@
     font-size: 1.35rem;
     font-weight: 800;
     color: var(--red);
-  }
-
-  .journey-footer {
-    grid-template-columns: 1fr auto;
-    align-items: center;
-    gap: 1.5rem;
-  }
-
-  .journey-footer .btn-primary {
-    width: auto;
   }
 
   .hero {

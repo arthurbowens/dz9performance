@@ -15,6 +15,8 @@ export class App {
     natalie: 0,
     ricardo: 0,
     jorge: 0,
+    franciele: 0,
+    alegra: 0,
   });
 
   private readonly athletesTrack = viewChild<ElementRef<HTMLElement>>('athletesTrack');
@@ -28,7 +30,6 @@ export class App {
   protected readonly navLinks = [
     { href: '#quem-somos', label: 'Quem Somos' },
     { href: '#metodo', label: 'Método' },
-    { href: '#jornada', label: 'Jornada' },
     { href: '#atletas', label: 'Atletas' },
     { href: '#resultados', label: 'Resultados' },
     { href: '#contato', label: 'Contato' },
@@ -75,27 +76,6 @@ export class App {
     },
   ];
 
-  protected readonly levels = [
-    {
-      name: 'DZ9 Start',
-      tone: 'start',
-      description:
-        'Direcionado para iniciantes. Foco total em emagrecimento ativo, adaptação neuromuscular ao treinamento e criação sólida de uma nova rotina saudável.',
-    },
-    {
-      name: 'DZ9 Pro',
-      tone: 'pro',
-      description:
-        'Nível intermediário. Foco em hipertrofia acelerada, recomposição corporal eficiente (ganhar massa e perder gordura) e aplicação de intensidade progressiva.',
-    },
-    {
-      name: 'DZ9 Elite',
-      tone: 'elite',
-      description:
-        'Nível avançado. Foco em máxima performance esportiva, definição muscular extrema e aplicação de técnicas avançadas com o acompanhamento mais próximo da equipe.',
-    },
-  ];
-
   protected readonly tripod = [
     { title: 'Treino', icon: 'dumbbell' },
     { title: 'Alimentação', icon: 'nutrition' },
@@ -114,6 +94,36 @@ export class App {
       role: 'Atleta profissional',
       details: ['Grêmio', 'Seleção Brasileira de Base', 'Atualmente Braga (Portugal)'],
       photo: '/kauankevin.jpeg',
+    },
+    {
+      name: 'Kevyn',
+      role: 'Atleta profissional',
+      details: ['Internacional', 'Palmeiras', 'América-MG', 'Atlético-GO'],
+      photo: '/kevyn.jpeg',
+    },
+    {
+      name: 'Bernardo',
+      role: 'Atleta profissional',
+      details: ['Grêmio', 'São José-RS'],
+      photo: '/bernardo.jpeg',
+    },
+    {
+      name: 'Caniggia',
+      role: 'Atleta profissional',
+      details: ['Grêmio', 'Botafogo', 'Paraná'],
+      photo: '/caniggia.jpeg',
+    },
+    {
+      name: 'Da Silva',
+      role: 'Atleta profissional',
+      details: ['Grêmio', 'Paraná', 'Ponte Preta'],
+      photo: '/dasilva.jpeg',
+    },
+    {
+      name: 'Robyson Lukas',
+      role: 'Atleta profissional',
+      details: ['Grêmio', 'Monsoon', 'Lajeadense'],
+      photo: '/robyson.jpeg',
     },
     {
       name: 'Benjamim',
@@ -205,6 +215,38 @@ export class App {
         },
       ],
     },
+    {
+      id: 'franciele',
+      name: 'Franciele',
+      pairs: [
+        {
+          pose: 'Perfil',
+          before: '/franciele1antes.jpeg',
+          after: '/franciele1dps.jpeg',
+        },
+        {
+          pose: 'Frente',
+          before: '/franciele2antes.jpeg',
+          after: '/franciele2dps.jpeg',
+        },
+      ],
+    },
+    {
+      id: 'alegra',
+      name: 'Alegra',
+      pairs: [
+        {
+          pose: 'Treino',
+          before: '/alegra1antes.jpeg',
+          after: '/alegra1dps.jpeg',
+        },
+        {
+          pose: 'Costas',
+          before: '/alegra2antes.jpeg',
+          after: '/alegra2dps.jpeg',
+        },
+      ],
+    },
   ];
 
   toggleMenu(): void {
@@ -287,15 +329,17 @@ export class App {
   }
 
   prevResult(personId: string): void {
-    const current = this.resultIndex()[personId] ?? 0;
-    this.goToResult(personId, Math.max(0, current - 1));
+    this.goToResult(personId, Math.max(0, this.resultIdx(personId) - 1));
   }
 
   nextResult(personId: string): void {
     const person = this.resultPeople.find((item) => item.id === personId);
     if (!person) return;
-    const current = this.resultIndex()[personId] ?? 0;
-    this.goToResult(personId, Math.min(person.pairs.length - 1, current + 1));
+    this.goToResult(personId, Math.min(person.pairs.length - 1, this.resultIdx(personId) + 1));
+  }
+
+  resultIdx(personId: string): number {
+    return this.resultIndex()[personId] ?? 0;
   }
 
   @HostListener('window:resize')

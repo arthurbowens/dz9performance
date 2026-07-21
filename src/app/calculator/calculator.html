@@ -1,0 +1,94 @@
+<section id="calculadora" class="section calc-section">
+  <div class="container">
+    <header class="section-head">
+      <span class="section-label">Calculadora</span>
+      <h2>Descubra quanto seu corpo precisa <span class="text-red">por dia</span></h2>
+      <p>
+        Informe seu peso e veja uma estimativa da quantidade ideal de água, proteína e creatina para
+        otimizar sua saúde e seus resultados.
+      </p>
+    </header>
+
+    <div class="calc-panel">
+      <form class="calc-form" (submit)="$event.preventDefault(); calculate()">
+        <label class="calc-field">
+          <span>Peso (kg)</span>
+          <input
+            type="number"
+            name="peso"
+            inputmode="decimal"
+            min="30"
+            max="250"
+            step="0.1"
+            placeholder="Ex: 80"
+            [value]="weight()"
+            (input)="onWeightInput($event)"
+            aria-label="Peso em quilogramas"
+          />
+        </label>
+
+        <label class="calc-field">
+          <span>Objetivo</span>
+          <select
+            name="objetivo"
+            [value]="goal()"
+            (change)="onGoalChange($event)"
+            aria-label="Objetivo"
+          >
+            @for (item of goals; track item.value) {
+              <option [value]="item.value">{{ item.label }}</option>
+            }
+          </select>
+        </label>
+
+        <button type="submit" class="btn-primary calc-submit">Calcular</button>
+      </form>
+
+      @if (error()) {
+        <p class="calc-error" role="alert">{{ error() }}</p>
+      }
+
+      @if (result(); as res) {
+        <div
+          #calcResults
+          class="calc-results"
+          [class.visible]="showResults()"
+          aria-live="polite"
+        >
+          <article class="calc-card" style="--delay: 0ms">
+            <div class="calc-icon" aria-hidden="true">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round">
+                <path d="M12 2.69 17.66 8.3a8 8 0 1 1-11.32 0Z" />
+              </svg>
+            </div>
+            <h3>Água</h3>
+            <p class="calc-value">{{ formatWater(res.waterL) }} <span>L/dia</span></p>
+            <p class="calc-desc">Quantidade diária recomendada.</p>
+          </article>
+
+          <article class="calc-card" style="--delay: 80ms">
+            <div class="calc-icon" aria-hidden="true">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round">
+                <path d="M6.5 6.5v11M17.5 6.5v11M4 9v6M20 9v6M6.5 12h11M4 12H2.5M20 12h1.5" />
+              </svg>
+            </div>
+            <h3>Proteína</h3>
+            <p class="calc-value">{{ res.proteinG }} <span>g/dia</span></p>
+            <p class="calc-desc">Estimativa baseada no seu objetivo.</p>
+          </article>
+
+          <article class="calc-card" style="--delay: 160ms">
+            <div class="calc-icon" aria-hidden="true">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round">
+                <path d="M13 2 4.5 12.5h6.5L11 22l8.5-10.5H13Z" />
+              </svg>
+            </div>
+            <h3>Creatina</h3>
+            <p class="calc-value">{{ formatCreatine(res.creatineG) }} <span>g/dia</span></p>
+            <p class="calc-desc">Dose diária sugerida.</p>
+          </article>
+        </div>
+      }
+    </div>
+  </div>
+</section>

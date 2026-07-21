@@ -1,8 +1,9 @@
 import { Component, ElementRef, HostListener, viewChild, signal } from '@angular/core';
+import { Calculator } from './calculator/calculator';
 
 @Component({
   selector: 'app-root',
-  imports: [],
+  imports: [Calculator],
   templateUrl: './app.html',
   styleUrl: './app.css',
 })
@@ -30,6 +31,7 @@ export class App {
   protected readonly navLinks = [
     { href: '#quem-somos', label: 'Quem Somos' },
     { href: '#metodo', label: 'Método' },
+    { href: '#calculadora', label: 'Calculadora' },
     { href: '#atletas', label: 'Atletas' },
     { href: '#resultados', label: 'Resultados' },
     { href: '#contato', label: 'Contato' },

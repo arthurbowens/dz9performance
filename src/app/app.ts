@@ -1,9 +1,10 @@
 import { Component, ElementRef, HostListener, viewChild, signal } from '@angular/core';
 import { Calculator } from './calculator/calculator';
+import { Assistant } from './assistant/assistant';
 
 @Component({
   selector: 'app-root',
-  imports: [Calculator],
+  imports: [Calculator, Assistant],
   templateUrl: './app.html',
   styleUrl: './app.css',
 })

@@ -1,0 +1,93 @@
+@if (open()) {
+  <div class="assistant-overlay" (click)="close()" role="presentation">
+    <div
+      class="assistant-modal"
+      role="dialog"
+      aria-modal="true"
+      aria-labelledby="assistant-title"
+      (click)="$event.stopPropagation()"
+    >
+      <div class="assistant-top">
+        <div class="assistant-avatar" aria-hidden="true">
+          <img src="/fotothales.jpeg" alt="" width="40" height="40" />
+        </div>
+        <div class="assistant-top-text">
+          <strong id="assistant-title">Assistente DZ9 Performance</strong>
+          <p>Equipe DZ9 · Respostas rápidas</p>
+        </div>
+        <span class="assistant-status">Online</span>
+        <button type="button" class="btn-close" (click)="close()" aria-label="Fechar assistente">
+          ✕
+        </button>
+      </div>
+
+      <div #chatFeed class="assistant-feed" role="log" aria-live="polite">
+        @for (msg of messages(); track msg.id) {
+          <div class="bubble" [class.bot]="msg.role === 'bot'" [class.user]="msg.role === 'user'">
+            <p>{{ msg.text }}</p>
+          </div>
+        }
+      </div>
+
+      @if (started() && !finished()) {
+        <div class="assistant-composer">
+          @if (currentStep().options; as options) {
+            <div class="assistant-options">
+              @for (option of options; track option) {
+                <button type="button" class="chip" (click)="pickOption(option)">{{ option }}</button>
+              }
+            </div>
+          }
+
+          @if (showCustomInput()) {
+            <form class="composer-form" (submit)="$event.preventDefault(); submitAnswer()">
+              <input
+                #composerInput
+                [type]="currentStep().inputType"
+                [placeholder]="currentStep().placeholder"
+                [value]="draft()"
+                (input)="onDraftInput($event)"
+                [attr.aria-label]="currentStep().placeholder"
+                autocomplete="off"
+              />
+              <button type="submit" class="btn-send">Enviar</button>
+            </form>
+          }
+
+          @if (error()) {
+            <p class="assistant-error" role="alert">{{ error() }}</p>
+          }
+
+          <p class="assistant-progress">
+            Pergunta {{ stepIndex() + 1 }} de {{ steps.length }}
+          </p>
+        </div>
+      }
+
+      @if (finished()) {
+        <div class="assistant-finish">
+          <a
+            class="btn-whatsapp-send"
+            [href]="whatsappHref()"
+            rel="noopener noreferrer"
+          >
+            Abrir WhatsApp
+          </a>
+        </div>
+      }
+    </div>
+  </div>
+}
+
+<button
+  type="button"
+  class="assistant-fab"
+  (click)="openAssistant()"
+  aria-label="Abrir Assistente DZ9 Performance"
+>
+  <span class="fab-photo">
+    <img src="/fotothales.jpeg" alt="" width="40" height="40" />
+    <span class="fab-dot" aria-hidden="true"></span>
+  </span>
+  Assistente
+</button>

@@ -22,6 +22,12 @@ export class App {
   });
 
   private readonly athletesTrack = viewChild<ElementRef<HTMLElement>>('athletesTrack');
+  private readonly assistant = viewChild(Assistant);
+
+  openAssistant(): void {
+    this.closeMenu();
+    this.assistant()?.openAssistant();
+  }
 
   protected readonly whatsappUrl =
     'https://wa.me/555185679046?text=' +

@@ -6,7 +6,12 @@ type FieldKey =
   | 'height'
   | 'weight'
   | 'goal'
-  | 'gym'
+  | 'experience'
+  | 'gymSchedule'
+  | 'frequency'
+  | 'modality'
+  | 'trainer'
+  | 'medical'
   | 'difficulty';
 
 interface ChatMessage {
@@ -17,17 +22,15 @@ interface ChatMessage {
 
 interface Step {
   key: FieldKey;
-  question: string;
   placeholder: string;
   inputType: 'text' | 'number';
   options?: string[];
-  /** When true, free typing is hidden unless the user picks "Outro". */
   preferOptions?: boolean;
   validate: (value: string) => string | null;
 }
 
 const WHATSAPP_NUMBER = '555185679046';
-const OTHER_LABEL = 'Outro';
+const OTHER_OPTIONS = new Set(['Outro', 'Outros']);
 
 @Component({
   selector: 'app-assistant',
@@ -54,15 +57,12 @@ export class Assistant {
   protected readonly steps: Step[] = [
     {
       key: 'name',
-      question:
-        'Olá! Sou o Assistente DZ9 Performance. Qual é o seu nome?',
       placeholder: 'Seu nome',
       inputType: 'text',
       validate: (v) => (v.trim().length < 2 ? 'Informe seu nome.' : null),
     },
     {
       key: 'age',
-      question: 'Qual a sua idade?',
       placeholder: 'Ex: 28',
       inputType: 'number',
       validate: (v) => {
@@ -73,63 +73,101 @@ export class Assistant {
     },
     {
       key: 'height',
-      question: 'Qual a sua altura em cm?',
       placeholder: 'Ex: 175',
       inputType: 'number',
       validate: (v) => {
         const n = Number(String(v).replace(',', '.'));
-        if (!Number.isFinite(n) || n < 120 || n > 230) return 'Informe uma altura entre 120 e 230 cm.';
+        if (!Number.isFinite(n) || n < 120 || n > 230) return 'Informe a altura em centímetros (120 a 230).';
         return null;
       },
     },
     {
       key: 'weight',
-      question: 'E o seu peso atual em kg?',
       placeholder: 'Ex: 80',
       inputType: 'number',
       validate: (v) => {
         const n = Number(String(v).replace(',', '.'));
-        if (!Number.isFinite(n) || n < 30 || n > 250) return 'Informe um peso entre 30 e 250 kg.';
+        if (!Number.isFinite(n) || n < 30 || n > 250) return 'Informe o peso em kg (30 a 250).';
         return null;
       },
     },
     {
       key: 'goal',
-      question: 'Qual é o seu objetivo principal?',
-      placeholder: 'Seu objetivo',
+      placeholder: 'Qual o seu objetivo?',
       inputType: 'text',
       preferOptions: true,
       options: [
-        'Saúde',
         'Emagrecimento',
-        'Hipertrofia',
-        'Alto rendimento',
-        'Recomposição',
-        OTHER_LABEL,
+        'Ganho de massa muscular',
+        'Definição corporal',
+        'Condicionamento',
+        'Qualidade de vida',
+        'Concurso',
+        'Performance esportiva',
+        'Outros',
       ],
       validate: (v) => (v.trim().length < 2 ? 'Escolha ou digite seu objetivo.' : null),
     },
     {
-      key: 'gym',
-      question: 'Em qual academia ou rede você deseja treinar?',
-      placeholder: 'Nome da academia ou rede',
+      key: 'experience',
+      placeholder: 'Ex: Sim, há 1 ano',
       inputType: 'text',
       preferOptions: true,
       options: [
-        'Smart Fit',
-        'Bluefit',
-        'Bodytech',
-        'Bio Ritmo',
-        'Selfit',
-        'Academia particular',
-        'Ainda não sei',
-        OTHER_LABEL,
+        'Não treino ainda',
+        'Menos de 3 meses',
+        '3 a 6 meses',
+        '6 a 12 meses',
+        'Mais de 1 ano',
+        'Outro',
       ],
-      validate: (v) => (v.trim().length < 2 ? 'Informe a academia ou rede.' : null),
+      validate: (v) => (v.trim().length < 2 ? 'Conte se você já treina e há quanto tempo.' : null),
+    },
+    {
+      key: 'gymSchedule',
+      placeholder: 'Ex: Smart Fit Moinhos, manhã',
+      inputType: 'text',
+      validate: (v) =>
+        v.trim().length < 3 ? 'Informe a academia (unidade) e o horário disponível.' : null,
+    },
+    {
+      key: 'frequency',
+      placeholder: 'Ex: 3x',
+      inputType: 'text',
+      preferOptions: true,
+      options: ['2x', '3x', '4x', '5x ou mais'],
+      validate: (v) => (v.trim().length < 1 ? 'Escolha quantas vezes por semana.' : null),
+    },
+    {
+      key: 'modality',
+      placeholder: 'Modalidade de atendimento',
+      inputType: 'text',
+      preferOptions: true,
+      options: [
+        'Treino presencial com o treinador',
+        'Consultoria on-line',
+        'Híbrido (1 ou 2 aulas presenciais + consultoria)',
+      ],
+      validate: (v) => (v.trim().length < 2 ? 'Escolha a modalidade de atendimento.' : null),
+    },
+    {
+      key: 'trainer',
+      placeholder: 'Preferência de treinador',
+      inputType: 'text',
+      preferOptions: true,
+      options: ['Treinador Thales', 'Treinadora Rafaela', 'Sem preferência'],
+      validate: (v) => (v.trim().length < 2 ? 'Escolha sua preferência de treinador.' : null),
+    },
+    {
+      key: 'medical',
+      placeholder: 'Ex: Nenhuma, ou descreva a restrição',
+      inputType: 'text',
+      preferOptions: true,
+      options: ['Nenhuma', 'Lesão', 'Dor', 'Outro'],
+      validate: (v) => (v.trim().length < 2 ? 'Informe se há restrição médica, lesão ou dor.' : null),
     },
     {
       key: 'difficulty',
-      question: 'Por último: qual é a sua maior dificuldade hoje?',
       placeholder: 'Sua maior dificuldade',
       inputType: 'text',
       preferOptions: true,
@@ -139,8 +177,8 @@ export class Assistant {
         'Falta de tempo',
         'Técnica nos exercícios',
         'Motivação',
-        'Lesão / dores',
-        OTHER_LABEL,
+        'Lesão/dores',
+        'Outro',
       ],
       validate: (v) => (v.trim().length < 2 ? 'Conte qual é a maior dificuldade.' : null),
     },
@@ -180,16 +218,25 @@ export class Assistant {
     this.error.set('');
     this.whatsappHref.set('');
     this.showCustomInput.set(true);
-    this.messages.set([this.botMessage(this.steps[0].question)]);
+    this.messages.set([
+      this.botMessage(
+        'Oi! Somos da DZ9 Performance 🔥, e vamos te fazer uma anamnese bem prática, para te conhecer melhor e traçar o caminho mais específico para teu objetivo 🚀',
+      ),
+      this.botMessage('Sou o treinador Thales, como você se chama?'),
+    ]);
     this.syncInputVisibility();
     this.scrollFeed();
     this.focusInput();
   }
 
   pickOption(option: string): void {
-    if (option === OTHER_LABEL) {
+    const needsDetail =
+      OTHER_OPTIONS.has(option) ||
+      (this.currentStep().key === 'medical' && (option === 'Lesão' || option === 'Dor'));
+
+    if (needsDetail) {
       this.showCustomInput.set(true);
-      this.draft.set('');
+      this.draft.set(OTHER_OPTIONS.has(option) ? '' : `${option}: `);
       this.error.set('');
       this.focusInput();
       return;
@@ -241,20 +288,46 @@ export class Assistant {
     this.stepIndex.set(next);
     this.syncInputVisibility();
 
-    const name = this.answers().name ?? '';
-    const nextQuestion =
-      next === 1
-        ? `Prazer, ${name.split(' ')[0]}! Qual a sua idade?`
-        : this.steps[next].question;
-
     window.setTimeout(() => {
-      this.pushMessage({ role: 'bot', text: nextQuestion });
+      this.pushMessage({ role: 'bot', text: this.questionFor(next) });
       this.focusInput();
     }, 220);
   }
 
   restart(): void {
     this.begin();
+  }
+
+  private questionFor(index: number): string {
+    const name = (this.answers().name ?? '').split(' ')[0];
+    const key = this.steps[index].key;
+
+    switch (key) {
+      case 'age':
+        return `Prazer, ${name}! Qual a sua idade?`;
+      case 'height':
+        return 'Qual sua altura? Em centímetros.';
+      case 'weight':
+        return 'E seu peso atual em kg?';
+      case 'goal':
+        return 'E qual seu principal objetivo com os treinos?';
+      case 'experience':
+        return 'Você já treina? Quanto tempo?';
+      case 'gymSchedule':
+        return 'Qual academia (unidade) você pretende treinar? E qual horário tem disponibilidade?';
+      case 'frequency':
+        return 'Quantas vezes por semana você consegue treinar?';
+      case 'modality':
+        return `${name}, você tem preferência por qual modalidade de atendimento?`;
+      case 'trainer':
+        return 'Tem preferência por treinar com o treinador Thales, a treinadora Rafaela, ou sem preferência?';
+      case 'medical':
+        return 'Possui alguma restrição médica? Lesão ou dor que devemos considerar?';
+      case 'difficulty':
+        return 'Por último, qual sua maior dificuldade hoje?';
+      default:
+        return 'Pode continuar.';
+    }
   }
 
   private normalizeValue(key: FieldKey, raw: string): string {
@@ -272,14 +345,19 @@ export class Assistant {
   private finish(): void {
     const a = this.answers();
     const summary = [
-      'Olá! Vim pelo Assistente DZ9 Performance.',
+      'Olá! Vim pelo Assistente DZ9 Performance (anamnese do site).',
       '',
       `Nome: ${a.name}`,
       `Idade: ${a.age}`,
       `Altura: ${a.height} cm`,
       `Peso: ${a.weight} kg`,
       `Objetivo: ${a.goal}`,
-      `Academia/Rede: ${a.gym}`,
+      `Experiência: ${a.experience}`,
+      `Academia/horário: ${a.gymSchedule}`,
+      `Frequência: ${a.frequency}`,
+      `Modalidade: ${a.modality}`,
+      `Preferência de treinador: ${a.trainer}`,
+      `Restrição médica: ${a.medical}`,
       `Maior dificuldade: ${a.difficulty}`,
       '',
       'Quero iniciar o acompanhamento com a equipe.',
